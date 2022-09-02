@@ -1,23 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {mails} from "./data/mails";
+import {Mail} from "./models/Mail"
+
+type MailProps = {
+    mail: Mail;
+}
+
+function MailItem({mail}: MailProps) {
+    return (
+        <div className="ml-3">
+            <p className="text-sm font-medium text-gray-900">{mail.from.username}</p>
+            <p className="text-sm text-gray-500">{mail.subject}</p>
+        </div>
+    )
+}
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ul>
+          {
+            mails.map((mail) =>
+                <MailItem key={mail.from.name} mail={mail} />
+            )
+          }
+        </ul>
       </header>
     </div>
   );
